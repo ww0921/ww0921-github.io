@@ -270,8 +270,24 @@
 <div class="article-content">
     <div id="article" class="content">
         <p>首先什么是跨域，出于浏览器的安全考虑，都会遵守一个约定叫“同源策略”，同源的意思就是你所访问这两个地址的协议(http、https）、域名、端口号都相同，然后这个地址就可以互相访问cookie、localstorage、sessionstorage、发送ajax请求。如果协议(http、https）、域名、端口号有一个不相同，再去访问这些资源就叫跨域。</p>
-<h2 id="浏览器为什么要阻止跨域请求？"><a href="#浏览器为什么要阻止跨域请求？" class="headerlink" title="浏览器为什么要阻止跨域请求？"></a><strong>浏览器为什么要阻止跨域请求？</strong></h2><p>跨域访问会造成很多安全问题，下面我们来看一下常见的两种跨域请求：<br>ajax 请求：A.com 中 请求 B.com 的接口，这个时候请求会带上 B.com 的 cookie，通常会有登录信息之类的，我们称之为 CSRF攻击<br>dom 操作：A.com 中使用 iframe 嵌套了 B.com 的广告，这时候如果 B.com 对 A.com 中的 dom 任意操作，那么主网站 A.com 就崩了<br>//参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28773159/article/details/104834167">https://blog.csdn.net/qq_28773159/article/details/104834167</a></p>
-<h2 id="如何解决跨域"><a href="#如何解决跨域" class="headerlink" title="如何解决跨域"></a><strong>如何解决跨域</strong></h2><p>创建两个不同端口号的服务端(.js)，用端口号不同演示跨域解决。<br>document.querySelector(“.btn1”).onclick=function(){  //获取类叫btn1的按钮<br>  let xhr=new XMLHttpRequest();  //创建 XMLHttpRequest 对象的语法<br>  xhr.open(“get”,”另一个端口号地址”,true); //XMLHttpRequest.open()方法用于指定 HTTP 请求的参数<br>  xhr.onload=function(){      //请求成功完成时调用的函数<br>    console.log(xhr.responseText);  //在一个请求被发送后，从服务器端返回文本。<br>  }<br>  xhr.send(); // 方法用于发送 HTTP 请求。如果是异步请求（默认为异步请求），则此方法会在请求发送后立即返回；如果是同步请求，则此方法直到响应到达后才会返回。如果请求方法是 GET 或者 HEAD，则应将请求主体设置为 null。<br>}</p>
+<h3 id="浏览器为什么要阻止跨域请求？"><a href="#浏览器为什么要阻止跨域请求？" class="headerlink" title="浏览器为什么要阻止跨域请求？"></a><strong>浏览器为什么要阻止跨域请求？</strong></h3><p>跨域访问会造成很多安全问题，下面我们来看一下常见的两种跨域请求：<br>ajax 请求：A.com 中 请求 B.com 的接口，这个时候请求会带上 B.com 的 cookie，通常会有登录信息之类的，我们称之为 CSRF攻击<br>dom 操作：A.com 中使用 iframe 嵌套了 B.com 的广告，这时候如果 B.com 对 A.com 中的 dom 任意操作，那么主网站 A.com 就崩了<br>//参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28773159/article/details/104834167">https://blog.csdn.net/qq_28773159/article/details/104834167</a></p>
+<h3 id="如何解决跨域"><a href="#如何解决跨域" class="headerlink" title="如何解决跨域"></a><strong>如何解决跨域</strong></h3><p>创建两个不同端口号的服务端(.js)，用端口号不同演示跨域解决。 </p>
+<p>//获取类叫btn1的按钮<br>document.querySelector(“.btn1”).onclick=function(){  </p>
+<p>  //创建 XMLHttpRequest 对象的语法<br>  let xhr=new XMLHttpRequest(); </p>
+<p>  //XMLHttpRequest.open()方法用于指定 HTTP 请求的参数<br>  xhr.open(“get”,”另一个端口号地址”,true); </p>
+<p>  //请求成功完成时调用的函数<br>  xhr.onload=function(){     </p>
+<pre><code>//在一个请求被发送后，从服务器端返回文本。 
+console.log(xhr.responseText);  
+</code></pre>
+<p>  }</p>
+<p>  // 方法用于发送 HTTP 请求。如果是异步请求（默认为异步请求），则此方法会在请求发送后立即返回；如果是同步请求，则此方法直到响应到达后才会返回。如果请求方法是 GET 或者 HEAD，则应将请求主体设置为 null。<br>  xhr.send();<br>}</p>
+<p>XMLHttpRequest 对象用于在后台与服务器交换数据。</p>
+<p>XMLHttpRequest.open(),可接受五个参数<br>method：表示HTTP动词方法，比如GET、POST、PUT、DELETE、HEAD等<br>url：表示请求发送目标URL<br>async：布尔值，表示请求是否为异步，默认为true。如果设为false，则send()方法只有等到收到服务器返回了结果，才会进行下一步操作。该参数可选。由于同步 AJAX 请求会造成浏览器失去响应，许多浏览器已经禁止在主线程使用，只允许 Worker 里面使用。所以，这个参数轻易不应该设为false。<br>user：表示用于认证的用户名，默认为空字符串。该参数可选。<br>password：表示用于认证的密码，默认为空字符串。该参数可选。</p>
+<p><strong>当点击请求的时候，跨域请求都会到达服务端。</strong></p>
+<p><strong>解决跨域</strong>：<br>1.jsonp跨域<br>在html页面中通过相应的标签从不同域名下加载静态资源文件是被浏览器允许的（从js中调用不行），所以我们可以通过这个“漏洞”来进行跨域。一般，我们可以动态的创建script标签，再去请求一个带参网址来实现跨域通信。局限是只能get请求。</p>
+<p>//原生的实现方式<br>let script = document.createElement(‘script’);<br>script.src = ‘<a target="_blank" rel="noopener" href="http://www.xxx.com/xxx.js?callback=callback&#39;">http://www.xxx.com/xxx.js?callback=callback&#39;</a>;<br>document.body.appendChild(script);<br>function callback(res) {<br>  console.log(res);<br>}</p>
+<p>//jquery实现方式<br>$.ajax({<br>    url:’<a target="_blank" rel="noopener" href="http://www.xxx.com/login&#39;">http://www.xxx.com/login&#39;</a>,<br>    type:’GET’,<br>    dataType:’jsonp’,//请求方式为jsonp<br>    jsonpCallback:’callback’,<br>})<br>function callback(res) {<br>  console.log(res);<br>}</p>
+<p>2.修改响应头</p>
 
     </div>
 </div>
