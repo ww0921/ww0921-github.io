@@ -276,10 +276,7 @@
 <p>  //创建 XMLHttpRequest 对象的语法<br>  let xhr=new XMLHttpRequest(); </p>
 <p>  //XMLHttpRequest.open()方法用于指定 HTTP 请求的参数<br>  xhr.open(“get”,”另一个端口号地址”,true); </p>
 <p>  //请求成功完成时调用的函数<br>  xhr.onload=function(){     </p>
-<pre><code>//在一个请求被发送后，从服务器端返回文本。 
-console.log(xhr.responseText);  
-</code></pre>
-<p>  }</p>
+<p>  //在一个请求被发送后，从服务器端返回文本。<br>    console.log(xhr.responseText);<br>  }</p>
 <p>  // 方法用于发送 HTTP 请求。如果是异步请求（默认为异步请求），则此方法会在请求发送后立即返回；如果是同步请求，则此方法直到响应到达后才会返回。如果请求方法是 GET 或者 HEAD，则应将请求主体设置为 null。<br>  xhr.send();<br>}</p>
 <p>XMLHttpRequest 对象用于在后台与服务器交换数据。</p>
 <p>XMLHttpRequest.open(),可接受五个参数<br>method：表示HTTP动词方法，比如GET、POST、PUT、DELETE、HEAD等<br>url：表示请求发送目标URL<br>async：布尔值，表示请求是否为异步，默认为true。如果设为false，则send()方法只有等到收到服务器返回了结果，才会进行下一步操作。该参数可选。由于同步 AJAX 请求会造成浏览器失去响应，许多浏览器已经禁止在主线程使用，只允许 Worker 里面使用。所以，这个参数轻易不应该设为false。<br>user：表示用于认证的用户名，默认为空字符串。该参数可选。<br>password：表示用于认证的密码，默认为空字符串。该参数可选。</p>
@@ -316,6 +313,13 @@ console.log(xhr.responseText);
     $(function () { $('#article').click(function (e) { if (e.target.tagName == "IMG") { if ($('#nonediv').length == 0) { let MImg = `<div id='noneimg'><img src='${e.target.currentSrc}'></div>`; let MDiv = "<div id='nonediv' style='cursor: pointer;display: none; position: fixed;left: 0;top: 0; right: 0;bottom: 0;background-color: #333;opacity:0.5;z-index: 108;'></div>"; $('#article').append(MDiv); $('#article').append(MImg); $("#nonediv").fadeIn("slow"); $("#noneimg img").fadeIn("slow") } } else { if ($('#nonediv').length !== 0) { $("#noneimg ").fadeOut("slow"); $("#nonediv").fadeOut("slow"); setTimeout(function () { $('#nonediv').remove(); $('#noneimg').remove() }, 500) } } }); $('.article-content').addClass('content-move') });
 </script>
 <div class="Last-Next">
+    
+    <a href="/2021/10/07/this/">
+        <div class="last">
+            <span>上一篇</span>
+            <p>每日完成的训练目标</p>
+        </div>
+    </a>
     
 
     
