@@ -269,7 +269,7 @@
 </div>
 <div class="article-content">
     <div id="article" class="content">
-        <h4 id="如何判断this-箭头函数的this是什么"><a href="#如何判断this-箭头函数的this是什么" class="headerlink" title="如何判断this?箭头函数的this是什么?"></a><strong>如何判断this?箭头函数的this是什么?</strong></h4><p>1.函数调用<br>function foo(){<br>    console.log(this);<br>}<br>foo();<br>//非严格模式指向window，strict模式或者是<script type="module">（模块化）会返回undefined<br>2.函数在对象里面<br>let obj={<br>    name:"张三",<br>    foo(){<br>        console.log("foo",this);<br>    }<br>}<br>obj.foo();<br>//this指向调用的对象 foo{name,foo}<br>3.new方式，类或者构造函数<br>function Person(name){<br>    this.name=name;<br>}<br>Person.prototype.foo=function(){<br>    console.log("foo",this);<br>}<br>let zhangsan=new Person("张三");<br>zhangsan.foo();<br>//指向zhangsan，实例化对象  Person(name:"张三");</p>
+        <h4 id="如何判断this-箭头函数的this是什么"><a href="#如何判断this-箭头函数的this是什么" class="headerlink" title="如何判断this?箭头函数的this是什么?"></a><strong>如何判断this?箭头函数的this是什么?</strong></h4><p>1.函数调用<br>function foo(){<br>    console.log(this);<br>}<br>foo();<br>//非严格模式指向window，strict模式或者是（模块化）会返回undefined<br>2.函数在对象里面<br>let obj={<br>    name:”张三”,<br>    foo(){<br>        console.log(“foo”,this);<br>    }<br>}<br>obj.foo();<br>//this指向调用的对象 foo{name,foo}<br>3.new方式，类或者构造函数<br>function Person(name){<br>    this.name=name;<br>}<br>Person.prototype.foo=function(){<br>    console.log(“foo”,this);<br>}<br>let zhangsan=new Person(“张三”);<br>zhangsan.foo();<br>//指向zhangsan，实例化对象  Person(name:”张三”);</p>
 <p>箭头函数是es6新出的语法形式，箭头函数没有自己的this，会继承上一层作用域链的this，就是它的外层this指向谁，它就指向谁。</p>
 <h4 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a><strong>递归算法</strong></h4><p>1.求和1~100<br>function sum(n){<br>            if(n===1) return 1;<br>            return sum(n-1)+n;<br>        }<br>    console.log(sum(100));<br>2.求奇数和<br>//假设递归已写好<br>sum(5)<br>//寻找递归体<br>sum(5-2)+5=&gt;sum(n-2)+n<br>//临界条件<br>if n=1 return 1<br>//<br>function sum(n){<br>             if(n===1) {<br>                 return 1;<br>                }<br>             if (n%2==0) {<br>                 n–;<br>             }<br>             return sum(n-2)+n;<br>        }<br>        console.log(“和为：”+sum(7));</p>
 <h4 id="h5-c3日常练习"><a href="#h5-c3日常练习" class="headerlink" title="h5+c3日常练习"></a><strong>h5+c3日常练习</strong></h4>
@@ -301,12 +301,19 @@
 </script>
 <div class="Last-Next">
     
+    <a href="/2021/10/07/node/">
+        <div class="last">
+            <span>上一篇</span>
+            <p>node.js</p>
+        </div>
+    </a>
+    
 
     
-    <a href="/2021/10/07/node/">
+    <a href="/2021/09/30/cunchu/">
         <div class="next">
             <span>下一篇</span>
-            <p>node.js</p>
+            <p>cookie sessionstarage和localstorage的区别</p>
         </div>
     </a>
     
